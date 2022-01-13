@@ -1,0 +1,34 @@
+n,x=map(int,input().split())
+
+def prime(n):        
+    for i in range(2,n):
+        if n%i==0:            
+            return 0
+    return 1
+
+f=0
+if x==0:
+    print('YES')
+elif x>=n or n<6:
+    print('NO')
+else:
+    lastprime=2
+    count=0
+    for i in range(3,n+1):
+        if(prime(i)):
+            if (prime(1+i+lastprime) and 1+i+lastprime>=2 and 1+i+lastprime<=n):     
+                #print(1+i+lastprime)
+                count+=1
+                if count>=x:
+                    print('YES')
+                    f=1
+                    break
+            elif (1+i+lastprime>n and count<x):
+                print('NO')
+                f=1
+                break
+                
+            lastprime=i 
+    if f==0:
+        print('NO')
+           
