@@ -1,0 +1,16 @@
+toffee, money=map(int,input().split())
+l=list(map(int,input().split()))
+
+number=0
+l.sort()
+curr=0
+for toffee in l:
+    curr+=toffee
+    if (curr>money):
+        break
+    if (curr==money):
+        number+=1
+        break
+    number+=1
+print(number)
+
