@@ -1,0 +1,10 @@
+s1,e1,s2,e2 = map(int, input().split())
+
+start=max(s1,s2)
+end=min(e1,e2)
+if(end>start):
+    print(end-start)
+else:
+    print(0)
+
+    
