@@ -1,4 +1,5 @@
-#O(n logn) solution
+#O(n logn) time and O(1) space complexities
+
 num_toffee, money = map(int,input().split())
 prices = list(map(int,input().split()))         #array of toffee prices
 
@@ -13,6 +14,7 @@ for toffee in prices:
         number+=1
         break
     number+=1                                   #go to the next toffee
+
 print(number)                                   #print the number of toffees purchased
 
 
@@ -35,5 +37,5 @@ profit=[1]*num
 print (maxtoffee(Money, toffees, profit, num))
 
 This was giving time limit exceeded for larger number of toffees. So I simply sorted the toffee array and picked up as much toffees as we could from the start, 
-until Money was left. This solved the problem in O(nlogn) time complexity.
+until Money was left. This solved the problem in O(nlogn) time complexity due to inbuilt sorting function used, and some extra variables. Array was already given, so O(1) space.
 """
