@@ -1,34 +1,47 @@
-n,x=map(int,input().split())
-
-def prime(n):        
+#O(n*n)
+n,x=map(int,input().split())                #taking inputs n and x
+def prime(n):                               #function to tell if a number is prime or not
     for i in range(2,n):
         if n%i==0:            
             return 0
     return 1
 
-f=0
-if x==0:
+f=0                                     #flag if a prime number follows this property
+if x==0:                                #every range will have atleast 0 such numbers
     print('YES')
-elif x>=n or n<6:
+elif x>=n or n<6:                       #invalid if x>n, and no such number before 6
     print('NO')
 else:
-    lastprime=2
-    count=0
+    lastprime=2                         #last seen prime number, to be paired with the current prime number
+    count=0                             #count of the numbers with given property
     for i in range(3,n+1):
-        if(prime(i)):
-            if (prime(1+i+lastprime) and 1+i+lastprime>=2 and 1+i+lastprime<=n):     
+        if(prime(i)):                                                                               #if number is prime, pair it with lastprime
+            if (prime(1+i+lastprime) and 1+i+lastprime>=2 and 1+i+lastprime<=n):                    #if it falls in [2,n] and is prime, count it
                 #print(1+i+lastprime)
                 count+=1
-                if count>=x:
+                if count>=x:                                                                        #if count reaches x, stop
                     print('YES')
                     f=1
                     break
-            elif (1+i+lastprime>n and count<x):
-                print('NO')
+            elif (1+i+lastprime>n and count<x):                                                     #if sum of consecutive primes start increasing n, stop. All further pairs will also give a larger sum
+                print('NO')                                                                         #print NO and stop. flag it
                 f=1
                 break
                 
-            lastprime=i 
+            lastprime=i                                                                             #update lastprime with current prime for next iteration
     if f==0:
-        print('NO')
+        print('NO')                                                                                 #If no such number was ever found, print NO at the end and stop
+        
+        
+        
+"""
+Im saving the last seen prime number in a variable, and pairing it with the current, i.e. its consecutive prime. If this pair along with 1 gives a sum
+that lies in the range [2,n] and is prime, then i count that number. After every iteration, I update the value of the lastprime with the latest prime 
+which was seen and used to form a pair.
+Once the count exceeds x, we print YES and break. 
+If the prime pair and 1 gives a sum exceeding n, all further pairs will also do so. So we break, printing NO
+If we dont find any such prime number in the range, then at the end using the flag value, we print NO and stop.
+
+Here, we call prime function for all the numbers in the given range, which takes O(n) time. SO this becomes almost O(n*n)
+"""
            
