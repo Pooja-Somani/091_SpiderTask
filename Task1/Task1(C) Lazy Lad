@@ -1,17 +1,25 @@
-for i in range(int(input())):
-    boxes=int(input())    
-    rows=0
-    count=1
+#O(rows) solution
+for i in range(int(input())):               #for every room
+    boxes=int(input())                      #boxes in a room
+    rows=0                                  #number of complete rows initialised as 0
+    count=1                                 #current row iterator (complete or incomplete)
     while(1):
-        used=(count*(count+1))//2
-        if (used>boxes):
+        used=(count*(count+1))//2           #boxes used upto current(nth) row given as n(n+1)/2
+        if (used>boxes):                    #if used>boxes, last row is left incomplete, wont be counted
             break;
-        if (used==boxes):
+        if (used==boxes):                   #if used=boxes, last row is complete and counted
             rows+=1;
             break;
-        rows+=1;
-        count+=1;
-        
+        rows+=1;                            #complete row is counted
+        count+=1;                           #go to next row iterator        
 
-    print(rows)
+    print(rows)                             #print complete rows for the room
+    
+    
+    """
+    The number of boxes used in making n complete rows will be n(n-1)/2. Here it is count(count+1)/2
+    When a row would be completed, we count the number of boxes that will be used. If that exceeds the total boxes,
+    we leave that row incomplete. Else we count that row.
+    At the end, we return the number of complete rows counted for that room
+    """
             
