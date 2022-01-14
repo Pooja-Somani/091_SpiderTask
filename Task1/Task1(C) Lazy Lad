@@ -1,4 +1,5 @@
-#O(rows) solution
+#O(rows) time and O(1) space complexities
+
 for i in range(int(input())):               #for every room
     boxes=int(input())                      #boxes in a room
     rows=0                                  #number of complete rows initialised as 0
@@ -21,5 +22,7 @@ for i in range(int(input())):               #for every room
     When a row would be completed, we count the number of boxes that will be used. If that exceeds the total boxes,
     we leave that row incomplete. Else we count that row.
     At the end, we return the number of complete rows counted for that room
+    
+    There are only some extra variables used, so O(1) space, and O(n) time complexities
     """
             
