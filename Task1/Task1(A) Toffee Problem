@@ -1,16 +1,39 @@
-toffee, money=map(int,input().split())
-l=list(map(int,input().split()))
+#O(n logn) solution
+num_toffee, money = map(int,input().split())
+prices = list(map(int,input().split()))         #array of toffee prices
 
-number=0
-l.sort()
-curr=0
-for toffee in l:
-    curr+=toffee
-    if (curr>money):
+number = 0                                      #number of toffees purchased initialised as 0
+prices.sort()                                   #sorted the prices array
+curr=0                                          #current money spent
+for toffee in prices:
+    curr+=toffee                                #toffee purchased
+    if (curr > money):                          #if current exceeds money, stop and dont purchase that toffee
         break
-    if (curr==money):
+    if (curr == money):                         #if current = money, stop and purchase that toffee
         number+=1
         break
-    number+=1
-print(number)
+    number+=1                                   #go to the next toffee
+print(number)                                   #print the number of toffees purchased
 
+
+"""
+I also tried using 0/1 Knapsack approach, with prices of toffees indicating the weights, total money indicating the knapsack capacity,
+and profit associated with every toffee as 1. then I tried to maximise the profit, i.e. the number of toffees. The code for that 
+approach was: 
+def maxtoffee(Money, toffees, profit, num):
+    if num == 0 or Money == 0:
+        return 0
+    if (toffees[num-1] > Money):
+        return maxtoffee(Money, toffees, profit, num-1)
+    else:
+        return max(profit[num-1]+maxtoffee(Money-toffees[num-1],toffees,profit,num-1),
+            maxtoffee(Money, toffees, profit, num-1))
+
+num, Money=map(int, input().split())
+toffees=list(map(int,input().split()))
+profit=[1]*num
+print (maxtoffee(Money, toffees, profit, num))
+
+This was giving time limit exceeded for larger number of toffees. So I simply sorted the toffee array and picked up as much toffees as we could from the start, 
+until Money was left. This solved the problem in O(nlogn) time complexity.
+"""
