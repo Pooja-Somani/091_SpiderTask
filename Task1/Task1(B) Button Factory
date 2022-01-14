@@ -1,4 +1,5 @@
-#O(1) solution
+#O(1) time and O(1) space complexities
+
 s1, e1, s2, e2 = map(int, input().split())          #start and end times for buttons 1 and 2 taken respectively as s1,e1,s2,e2
 
 start=max(s1,s2)                                    #common start time, as the maximum of the two buttons
@@ -13,4 +14,6 @@ else:
 If the common end time is greater than the common start time, there is an intersection. Their positive difference gives the time for which 
 buttons were pressed together. 
 If end time is not greater than start time, there is no intersection. The buttons were pressed together for 0 time.
+
+Constant number of variables used and single iteration, so constant time and space complexities
 """
