@@ -1,10 +1,16 @@
-s1,e1,s2,e2 = map(int, input().split())
+#O(1) solution
+s1, e1, s2, e2 = map(int, input().split())          #start and end times for buttons 1 and 2 taken respectively as s1,e1,s2,e2
 
-start=max(s1,s2)
-end=min(e1,e2)
-if(end>start):
-    print(end-start)
+start=max(s1,s2)                                    #common start time, as the maximum of the two buttons
+end=min(e1,e2)                                      #common end time, as the minimum of the two buttons
+if(end>start):                                      
+    print(end-start)                                #print common duration of both buttons
 else:
-    print(0)
+    print(0)                                        #print 0 if no common duration
 
     
+"""
+If the common end time is greater than the common start time, there is an intersection. Their positive difference gives the time for which 
+buttons were pressed together. 
+If end time is not greater than start time, there is no intersection. The buttons were pressed together for 0 time.
+"""
