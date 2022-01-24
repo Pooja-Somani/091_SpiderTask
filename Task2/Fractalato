@@ -1,0 +1,26 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    long t;
+    cin>>t;
+    long up=1, down=0;
+    long newup, newdown;
+    
+    for(long i=1; i<=t; i++)
+    {
+        newup= ((up*3)+(down*1))%1000000007;
+        newdown= ((up*1)+(down*3))%1000000007;
+        up=newup;
+        down=newdown;
+    }       
+    long res= (up%1000000007);
+    cout<<res;
+    return 0;
+}
