@@ -6,7 +6,6 @@
 using namespace std;
 
 int main() {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
     int t;
     cin>>t;
     while(t--)
@@ -16,7 +15,7 @@ int main() {
         cin>>b;
         unsigned i=0, j=0, flag=1;
         
-        while(i<a.size() && j<b.size())
+        while(i<a.size() && j<b.size())             //iterate until one of the strings ends
         {
             if (a[i]==b[j])
             {
@@ -34,7 +33,7 @@ int main() {
             }                
         }
         
-        if (i==a.size())
+        if (i==a.size())                        //string a ends before string b. Iterate over the remaining string b
         {
             while(j<b.size())
             {
@@ -47,17 +46,30 @@ int main() {
             }
         }
         
-        if (j==b.size() && i<a.size())
+        if (j==b.size() && i<a.size())          //string b ends before string a
         {
             flag=0;            
         }
         //cout<<flag<<endl;
         
         if (flag==1)
-            cout<<"YES\n";
+            cout<<"YES\n";                  //return YES if string can be printed by that keyboard
         else
-            cout<<"NO\n";       
+            cout<<"NO\n";                   //return NO otherwise
         
     }   
     return 0;
 }
+
+
+/*
+This is a linear time solution where I use 2 pointers i and j for the strings a and b. The characters at indices i and j in the strings a and b are compared. 
+If they match, both the pointers are incremented. Otherwise, I check if the current character matches with the previous charater. In this case, only j is incremented.
+This goes on until one of the strings ends. In between, if the character doesn't match with the current or previous, then we return NO and stop. 
+Else, if string b ends before string a, NO is returned. This case is not possible to be printed by keyboard.
+If string a ends first, then we check if all the remaining characters of string b are same as the last character of string a. If not, return NO.
+If we reach till the end, then YES is returned.
+
+Time Complexity = O(n), where n is the length of the larger string.
+Space Complexity = O(1) as only constant extra space was used apart from the given strings.
+*/
