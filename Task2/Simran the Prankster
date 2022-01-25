@@ -47,3 +47,19 @@ int main() {
     }
     return 0;
 }
+
+/*
+Here we need to check all possible combinations possible with the operators +, -, *, /.
+For n operands, we need to insert (n-1) operators among these 4. So there are 4^(n-1) combinations to be tested.
+This gives us an exponential time O(4^n) solution as:
+
+We apply all 4 operators between first 2 operands and store their result. This result and the next number in the array are further evaluated.
+This goes on recursively until all numbers are over. The final result obtained with that combination of operators is matched with the given number.
+If they match, we return True and stop. If none of these 4^n combinations give the required result, then we return False at the end.
+If there is only 1 number, then we simply compare it with the required result, there is no need to applying any of these operators. 
+
+The depth of the recursion stack will be O(n). There are 4 function calls every time, but execution starts only after the previous call has returned false.
+Hence there is a single stack of depth n required, making the space complexity O(n).
+Time complexity = O(4^n)
+Space Complexity = O(n)
+*/
