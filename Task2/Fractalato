@@ -24,3 +24,13 @@ int main() {
     cout<<res;
     return 0;
 }
+
+/*
+With the given pattern, every up triangle gives 3 up triangles and 1 down triangle in the next second. 
+Every down triangle gives 3 down triangles and 1 up triangle.
+So we update the number of up and down triangles after every instance, and return the total number of up triangles remaining at the end.
+All computations are done modulo 10^9+7.
+
+Time Complexity = O(t) where t is the given time
+Space Complexity = O(1) as only constant extra space was used
+*/
