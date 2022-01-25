@@ -140,3 +140,19 @@ int main()
     paths(root, res);
     return 0;
 }
+
+
+/*
+There was a better approach with just the array, without having to construct the entire tree. That is logically a bit difficult to implement, so here we go with the
+original approach of constructing the tree and traversing it. 
+We keep adding the nodes in level order manner into the tree, along with the tapering nodes with value -1. 
+Then we explore all possible paths in this tree while adding the node values, which are saved in an array. If this sum matches with the given sum, we print 
+that path using the created array.
+This is how we can print all possible paths that give the required sum.
+
+Its time complexity will be O(n + n + n+ h*l) = O(n+hl) where h=height of tree, n=no. of nodes and l=no. of leaf nodes
+as we need to explore all possible l paths over n nodes in a tree of height h. We also use an array and a queue and traverse the tree, all of which take O(n) time
+Hence the resultant is O(n+hl)
+Space complexity will be O(n+h) as height of tree will be depth of recursion stack, and there are n nodes. So O(n+h)
+
+*/
