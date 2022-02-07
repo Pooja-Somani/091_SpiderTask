@@ -1,0 +1,93 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#include <bits/stdc++.h>
+using namespace std;
+
+long mid(long start, long end) 
+{
+    return (start+end)/2; 
+}
+
+long getSumUtil(long *t, long ss, long se, long qs, long qe, long si)
+{
+    if (qs <= ss && qe >= se)
+        return t[si];
+    if (se < qs || ss > qe)
+        return 0;
+    long m = mid(ss, se);
+    return getSumUtil(t, ss, m, qs, qe, 2*si+1) + getSumUtil(t, m+1, se, qs, qe, 2*si+2);
+}
+
+void updateutil(long *t, long ss, long se, long i, long diff, long si)
+{
+    if (i < ss || i > se)
+        return;
+    t[si] = t[si] + diff;
+    if (se != ss)
+    {
+        long m = mid(ss, se);
+        updateutil(t, ss, m, i, diff, 2*si + 1);
+        updateutil(t, m+1, se, i, diff, 2*si + 2);
+    }
+}
+
+void update(long arr[], long *t, long n, long i, long new_val)
+{    
+    long diff = new_val - arr[i];
+    arr[i] = new_val;
+    updateutil(t, 0, n-1, i, diff, 0);
+}
+
+long add(long *t, long n, long qs, long qe)
+{
+    return getSumUtil(t, 0, n-1, qs, qe, 0);
+}
+
+long util(long a[], long ss, long se, long *t, long si)
+{
+    if (ss == se)
+    {
+        t[si] = a[ss];
+        return a[ss];
+    }
+    long m = mid(ss, se);
+    t[si] = util(a, ss, m, t, si*2+1) + util(a, m+1, se, t, si*2+2);
+    return t[si];
+}
+
+long *tree(long a[], long n)
+{ 
+    long x = (long)(ceil(log2(n)));
+    long max_size = 2*(int)pow(2, x) - 1;
+    long *t = new long[max_size];
+    util(a, 0, n-1, t, 0);
+    return t;
+}
+
+int main()
+{
+    long n,q;
+    cin>>n>>q;
+    long a[n];
+    for(long i=0; i<n; i++)
+        cin>>a[i];    
+    long *t = tree(a, n);
+    
+    long l,r,d;
+    for(long i=0; i<q; i++)
+    {
+        cin>>d>>l>>r;
+        if (d==2)
+        {
+            cout<<add(t, n, l-1, r-1)<<endl;   
+        }
+        else
+        {
+            update(a, t, n, l-1, r);
+        }
+    }    
+    return 0;
+}
