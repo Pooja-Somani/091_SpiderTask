@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+ bool check(int arr[],int n)
+    {
+        for(int i=0;i<n;i++)
+        {
+           if(arr[i]%(i+1)||(i+1)%arr[i])
+               return false;
+        }
+        return true;
+    }
+    void swap(int &a,int &b)
+    {
+        int t=a;
+        a=b;
+        b=t;
+    }
+    void find(int arr[],int &count,int index,int n)
+    {
+        if(index==n)
+        {
+                count+=1;
+            return;
+        }
+        for(int i=index;i<n;i++)
+        {
+            swap(arr[i],arr[index]);
+            if(arr[index]%(index+1)==0||(index+1)%arr[index]==0)
+                find(arr,count,index+1,n);
+            swap(arr[i],arr[index]);
+        }
+    }
+    int countArrangement(int n) {
+        int count=0;
+        int arr[n];
+        for(int i=0;i<n;i++)
+            arr[i]=i+1;
+        find(arr,count,0,n);
+        return count;
+    }
+int main() {
+    int n;
+    cin>>n;
+    cout<<countArrangement(n)<<endl;    
+    return 0;
+}
